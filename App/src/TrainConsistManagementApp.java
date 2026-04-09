@@ -1,26 +1,33 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        System.out.println("=== Train Consist Management App ===");
+        HashMap<String, Integer> bogieCapacityMap = new HashMap<>();
 
-        Set<String> trainFormation = new LinkedHashSet<>();
+        bogieCapacityMap.put("Sleeper", 72);
+        bogieCapacityMap.put("AC Chair", 78);
+        bogieCapacityMap.put("First Class", 24);
+        bogieCapacityMap.put("Rectangular Goods", 100);
+        bogieCapacityMap.put("Cylindrical Goods", 120);
 
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
+        System.out.println("=== Train Bogie Capacity Details ===");
 
-        trainFormation.add("Sleeper");
+        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
+            String bogieName = entry.getKey();
+            Integer capacity = entry.getValue();
 
-        System.out.println("\nFinal Train Formation:");
-        System.out.println(trainFormation);
+            System.out.println("Bogie: " + bogieName + " | Capacity: " + capacity);
+        }
 
-        System.out.println("\nTotal bogies: " + trainFormation.size());
-
-        System.out.println("\nProgram continues...");
+        String searchBogie = "Sleeper";
+        if (bogieCapacityMap.containsKey(searchBogie)) {
+            System.out.println("\nCapacity of " + searchBogie + " Bogie: "
+                    + bogieCapacityMap.get(searchBogie));
+        } else {
+            System.out.println("\nBogie not found!");
+        }
     }
 }
