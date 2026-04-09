@@ -1,26 +1,45 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+// Step 1: Create Bogie class
+class Bogie {
+    String name;
+    int capacity;
+
+    Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    void display() {
+        System.out.println("Bogie: " + name + " | Capacity: " + capacity);
+    }
+}
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        System.out.println("=== Train Consist Management App ===");
+        List<Bogie> bogieList = new ArrayList<>();
 
-        Set<String> trainFormation = new LinkedHashSet<>();
+        bogieList.add(new Bogie("Sleeper", 72));
+        bogieList.add(new Bogie("AC Chair", 56));
+        bogieList.add(new Bogie("First Class", 24));
 
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
+        bogieList.sort(Comparator.comparingInt(b -> b.capacity));
 
-        trainFormation.add("Sleeper");
+        System.out.println("=== Bogies Sorted by Capacity (Ascending) ===");
 
-        System.out.println("\nFinal Train Formation:");
-        System.out.println(trainFormation);
+        for (Bogie b : bogieList) {
+            b.display();
+        }
+        bogieList.sort(Comparator.comparingInt((Bogie b) -> b.capacity).reversed());
 
-        System.out.println("\nTotal bogies: " + trainFormation.size());
+        System.out.println("\n=== Bogies Sorted by Capacity (Descending) ===");
 
-        System.out.println("\nProgram continues...");
+        for (Bogie b : bogieList) {
+            b.display();
+        }
     }
 }
