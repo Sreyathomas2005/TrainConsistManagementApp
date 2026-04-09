@@ -1,33 +1,45 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+// Step 1: Create Bogie class
+class Bogie {
+    String name;
+    int capacity;
+
+    Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    void display() {
+        System.out.println("Bogie: " + name + " | Capacity: " + capacity);
+    }
+}
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        HashMap<String, Integer> bogieCapacityMap = new HashMap<>();
+        List<Bogie> bogieList = new ArrayList<>();
 
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 78);
-        bogieCapacityMap.put("First Class", 24);
-        bogieCapacityMap.put("Rectangular Goods", 100);
-        bogieCapacityMap.put("Cylindrical Goods", 120);
+        bogieList.add(new Bogie("Sleeper", 72));
+        bogieList.add(new Bogie("AC Chair", 56));
+        bogieList.add(new Bogie("First Class", 24));
 
-        System.out.println("=== Train Bogie Capacity Details ===");
+        bogieList.sort(Comparator.comparingInt(b -> b.capacity));
 
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            String bogieName = entry.getKey();
-            Integer capacity = entry.getValue();
+        System.out.println("=== Bogies Sorted by Capacity (Ascending) ===");
 
-            System.out.println("Bogie: " + bogieName + " | Capacity: " + capacity);
+        for (Bogie b : bogieList) {
+            b.display();
         }
+        bogieList.sort(Comparator.comparingInt((Bogie b) -> b.capacity).reversed());
 
-        String searchBogie = "Sleeper";
-        if (bogieCapacityMap.containsKey(searchBogie)) {
-            System.out.println("\nCapacity of " + searchBogie + " Bogie: "
-                    + bogieCapacityMap.get(searchBogie));
-        } else {
-            System.out.println("\nBogie not found!");
+        System.out.println("\n=== Bogies Sorted by Capacity (Descending) ===");
+
+        for (Bogie b : bogieList) {
+            b.display();
         }
     }
 }
